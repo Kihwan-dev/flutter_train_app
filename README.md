@@ -1,16 +1,70 @@
-# flutter_train_app
+# 🚆 Flutter 기초 과제 - 기차 예매 서비스
 
-A new Flutter project.
+## 📌 과제 목표
+- 레이아웃 구성과 다양한 위젯 활용
+- 예외처리와 사용자 경험(UX) 고려
+- 기차 예매 앱 UI를 보고 **정확히 구현**하기
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🛠 프로젝트 기본 설정
 
-A few resources to get you started if this is your first Flutter project:
+- **프로젝트명**: `flutter_train_app`
+- **메인 화면**: `HomePage`
+- **역 선택 화면**: `StationListPage`
+- **좌석 선택 화면**: `SeatPage`
+- **기차역 목록**: 수서, 동탄, 평택지제, 천안아산, 오송, 대전, 김천구미, 동대구, 경주, 울산, 부산
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📱 화면 구조 & UI 명세
+
+### 🏠 HomePage
+- 출발역/도착역 선택 UI (`Container` 200 높이, `white`, radius 20)
+- 선택 전: “선택” 표시, 선택 시 역 이름 표시
+- 세로선 구분, 좌석 선택 버튼 (보라색, radius 20)
+- 전체 배경: `Colors.grey[200]`, padding: 20
+
+### 📍 StationListPage
+- AppBar 타이틀: `출발역` 또는 `도착역` (클릭 위치에 따라 다름)
+- 기차역 리스트 출력
+- 항목 터치 시 선택된 역 반환, 뒤로가기
+- 각 항목: 높이 50, 하단 border만 표시
+
+### 💺 SeatPage
+- 출발/도착역 상단 표시 (`FontWeight.bold`, `Colors.purple`, fontSize 30)
+- 좌석 상태 안내 (`선택됨`: 보라색 / `선택안됨`: 회색)
+- 20행 좌석 리스트 (A~D, 각 좌석 `50x50`, 간격 유지)
+- 예매 버튼 클릭 시 `CupertinoDialog` 표시 후 확인 시 HomePage로 이동
+
+---
+
+## ✅ 필수 기능
+
+- 출발/도착역 선택 기능 구현 (`Navigator.push`, `pop`)
+- 출발/도착역 둘 다 선택 시에만 좌석 선택 페이지로 이동 가능
+- 좌석 선택 후 예매 버튼 클릭 시 다이얼로그 처리 및 홈으로 복귀
+
+---
+
+## 🌟 도전 기능
+
+1. **위젯 컴포넌트화**
+   - 반복 요소(버튼, 좌석 박스 등) 별도 위젯으로 분리
+
+2. **UX 개선**
+   - 출발역 선택 시, 도착역 목록에서 해당 역 제외 (반대도 동일)
+
+3. **다크 모드 지원**
+   - `darkTheme`, `themeMode` 활용하여 다크 테마 구현
+
+4. **자율 기능 추가**
+   - 단, 필수/도전 기능 정상 작동을 방해하지 않는 선에서 구현
+
+---
+
+## 🧠 과제 유의사항
+
+- UI 명세를 **정확히** 지켜 구현
+- 예외처리 및 입력 검증 필수
+- 함수/클래스를 적절히 활용해 **가독성과 재사용성** 확보
