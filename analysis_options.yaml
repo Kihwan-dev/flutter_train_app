@@ -10,6 +10,8 @@
 analyzer:
   errors:
     use_key_in_widget_constructors: ignore
+    must_be_immutable: ignore
+    avoid_print: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:
