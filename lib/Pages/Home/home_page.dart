@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_train_app/Pages/Seat/seat_page.dart';
 import 'package:flutter_train_app/Pages/Station/station_list_page.dart';
 import 'package:flutter_train_app/Widgets/basic_title_appbar.dart';
 
@@ -35,7 +36,9 @@ class HomePage extends StatelessWidget {
               height: 50,
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SeatPage()));
+                },
                 child: Text(
                   "좌석 선택",
                   style: TextStyle(
