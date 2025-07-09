@@ -6,8 +6,9 @@ class SeatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BasicTitleAppBar(appBarTitleText: "좌석 선택", isBackOn: true),
-      bottomNavigationBar: SizedBox(
-        height: 50,
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.fromLTRB(20, 0, 20, 50),
+        height: 100,
         width: double.infinity,
         child: ElevatedButton(
           onPressed: () {},
