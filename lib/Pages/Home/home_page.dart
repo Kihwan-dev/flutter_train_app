@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SeatPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SeatPage(departureStation, arrivalStation)));
                 },
                 child: Text(
                   "좌석 선택",
@@ -70,9 +70,9 @@ class _HomePageState extends State<HomePage> {
           print(result);
           setState(() {
             if (isDepatureStation) {
-              departureStation = result;
+              departureStation = result ?? departureStation;
             } else {
-              arrivalStation = result;
+              arrivalStation = result ?? arrivalStation;
             }
           });
         },

@@ -1,7 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_train_app/Widgets/basic_title_appbar.dart';
 
-class SeatPage extends StatelessWidget {
+class SeatPage extends StatefulWidget {
+  String departureStation;
+  String arrivalStation;
+
+  String? selectedRow;
+  String? selectedCol;
+
+  SeatPage(this.departureStation, this.arrivalStation);
+
+  @override
+  State<SeatPage> createState() => _SeatPageState();
+}
+
+class _SeatPageState extends State<SeatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,93 +25,80 @@ class SeatPage extends StatelessWidget {
         height: 100,
         width: double.infinity,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            if(widget.selectedRow == null && widget.selectedCol == null) {
+              return;
+            }
+            showCupertinoDialog(
+              context: context,
+              builder: (context) {
+                return CupertinoAlertDialog(
+                  title: Text("예매 하시겠습니까?"),
+                  content: Text("좌석:${widget.selectedRow}-${widget.selectedCol}"),
+                  actions: [
+                    CupertinoDialogAction(
+                      isDestructiveAction: true,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text("취소"),
+                    ),
+                    CupertinoDialogAction(
+                      isDefaultAction: true,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        "확인",
+                        style: TextStyle(
+                          color: CupertinoColors.activeBlue,
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
           child: Text("예매 하기"),
         ),
       ),
       body: Column(
         children: [
-          SizedBox(
-            width: 266,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "수서",
-                  style: TextStyle(
-                    color: Colors.purple,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Spacer(),
-                Icon(
-                  Icons.arrow_circle_right_outlined,
-                  size: 30,
-                ),
-                Spacer(),
-                Text(
-                  "부산",
-                  style: TextStyle(
-                    color: Colors.purple,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+          getStationLayout(),
+          SizedBox(height: 10),
+          getColumnLabelLayout(),
+          SizedBox(height: 10),
+          getSelectableSeatLayout(),
+        ],
+      ),
+    );
+  }
+
+  SizedBox getStationLayout() {
+    return SizedBox(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(
+            widget.departureStation,
+            style: TextStyle(
+              color: Colors.purple,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 24,
-                height: 24,
-                decoration: BoxDecoration(
-                  color: Colors.purple,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              SizedBox(width: 4),
-              Text("선택됨"),
-              SizedBox(width: 10),
-              Container(
-                width: 24,
-                height: 24,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              SizedBox(width: 4),
-              Text("선택 안 됨"),
-            ],
+          Icon(
+            Icons.arrow_circle_right_outlined,
+            size: 30,
           ),
-          SizedBox(height: 10),
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.symmetric(vertical: 20),
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    getColumnLabelBox("A"),
-                    SizedBox(width: 4),
-                    getColumnLabelBox("B"),
-                    SizedBox(width: 4),
-                    getColumnLabelBox(""),
-                    SizedBox(width: 4),
-                    getColumnLabelBox("C"),
-                    SizedBox(width: 4),
-                    getColumnLabelBox("D"),
-                  ],
-                ),
-                ...List.generate(
-                  20,
-                  (index) => getSelectBoxRow(index + 1),
-                ),
-              ],
+          Text(
+            widget.arrivalStation,
+            style: TextStyle(
+              color: Colors.purple,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ],
@@ -105,53 +106,105 @@ class SeatPage extends StatelessWidget {
     );
   }
 
-  Column getSelectBoxRow(int num) {
+  Row getColumnLabelLayout() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        getColumnLabel("선택됨", Colors.purple),
+        SizedBox(width: 10),
+        getColumnLabel("선택 안 됨", Colors.grey[300]!),
+      ],
+    );
+  }
+
+  Expanded getSelectableSeatLayout() {
+    return Expanded(
+      child: ListView(
+        padding: EdgeInsets.symmetric(vertical: 20),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              getColumnLabelBox("A"),
+              SizedBox(width: 4),
+              getColumnLabelBox("B"),
+              SizedBox(width: 4),
+              getColumnLabelBox(""),
+              SizedBox(width: 4),
+              getColumnLabelBox("C"),
+              SizedBox(width: 4),
+              getColumnLabelBox("D"),
+            ],
+          ),
+          ...List.generate(
+            20,
+            (index) => getRowOfSelectableSeat(index + 1),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Row getColumnLabel(String content, Color color) {
+    return Row(
+      children: [
+        Container(
+          width: 24,
+          height: 24,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+        SizedBox(width: 4),
+        Text(content),
+      ],
+    );
+  }
+
+  Widget getRowOfSelectableSeat(int row) {
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            getSelectSeatBox(num.toString(), "A"),
+            getSelectableSeat(row.toString(), "A"),
             SizedBox(width: 4),
-            getSelectSeatBox(num.toString(), "B"),
+            getSelectableSeat(row.toString(), "B"),
             SizedBox(width: 4),
-            SizedBox(
-              width: 50,
-              height: 50,
-              child: Center(
-                child: Text(
-                  num.toString(),
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-            ),
+            getColumnLabelBox(row.toString()),
             SizedBox(width: 4),
-            getSelectSeatBox(num.toString(), "C"),
+            getSelectableSeat(row.toString(), "C"),
             SizedBox(width: 4),
-            getSelectSeatBox(num.toString(), "D"),
+            getSelectableSeat(row.toString(), "D"),
           ],
         ),
-        num < 20 ? SizedBox(height: 8) : SizedBox(),
+        row < 20 ? SizedBox(height: 8) : SizedBox(),
       ],
     );
   }
 
-  GestureDetector getSelectSeatBox(String row, String col) {
+  Widget getSelectableSeat(String row, String col) {
     return GestureDetector(
       onTap: () {
         print("$row$col");
+        setState(() {
+          widget.selectedRow = row;
+          widget.selectedCol = col;
+        });
       },
       child: Container(
         width: 50,
         height: 50,
-        decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(
+          color: widget.selectedCol == col && widget.selectedRow == row ? Colors.purple : Colors.grey[300],
+          borderRadius: BorderRadius.circular(8),
+        ),
       ),
     );
   }
 
-  SizedBox getColumnLabelBox(String label) {
+  Widget getColumnLabelBox(String label) {
     return SizedBox.square(
       dimension: 50,
       child: Center(
