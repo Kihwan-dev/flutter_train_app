@@ -16,7 +16,7 @@ class StationListPage extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              print(stationList[index]);
+              Navigator.pop(context, stationList[index]);
             },
             child: Container(
               height: 50,

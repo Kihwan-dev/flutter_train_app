@@ -3,7 +3,15 @@ import 'package:flutter_train_app/Pages/Seat/seat_page.dart';
 import 'package:flutter_train_app/Pages/Station/station_list_page.dart';
 import 'package:flutter_train_app/Widgets/basic_title_appbar.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String departureStation = "선택";
+  String arrivalStation = "선택";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,13 +29,13 @@ class HomePage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  getSeletStationBox(context, "출발역"),
+                  getSeletStationBox(context, "출발역", true),
                   Container(
                     height: 50,
                     width: 2,
                     color: Colors.grey[400],
                   ),
-                  getSeletStationBox(context, "도착역"),
+                  getSeletStationBox(context, "도착역", false),
                 ],
               ),
             ),
@@ -54,11 +62,19 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Expanded getSeletStationBox(BuildContext context, String label) {
+  Expanded getSeletStationBox(BuildContext context, String label, bool isDepatureStation) {
     return Expanded(
       child: GestureDetector(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => StationListPage(label)));
+        onTap: () async {
+          final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => StationListPage(label)));
+          print(result);
+          setState(() {
+            if (isDepatureStation) {
+              departureStation = result;
+            } else {
+              arrivalStation = result;
+            }
+          });
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -72,7 +88,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Text(
-              "선택",
+              isDepatureStation ? departureStation : arrivalStation,
               style: TextStyle(
                 fontSize: 40,
               ),
