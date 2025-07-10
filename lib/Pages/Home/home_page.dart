@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_train_app/Pages/Seat/seat_page.dart';
-import 'package:flutter_train_app/Pages/Station/station_list_page.dart';
+import 'package:flutter_train_app/pages/seat/seat_page.dart';
+import 'package:flutter_train_app/pages/station/station_list_page.dart';
 import 'package:flutter_train_app/Widgets/basic_title_appbar.dart';
 
 class HomePage extends StatefulWidget {

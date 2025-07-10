@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_train_app/Models/station_list_data.dart';
+import 'package:flutter_train_app/models/station_list_data.dart';
 import 'package:flutter_train_app/Widgets/basic_title_appbar.dart';
 
 class StationListPage extends StatelessWidget {
