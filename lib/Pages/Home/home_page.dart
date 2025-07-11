@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
+                  if(departureStation == "선택" || arrivalStation == "선택") return;
                   Navigator.push(context, MaterialPageRoute(builder: (context) => SeatPage(departureStation, arrivalStation)));
                 },
                 child: Text(
@@ -66,8 +67,17 @@ class _HomePageState extends State<HomePage> {
     return Expanded(
       child: GestureDetector(
         onTap: () async {
-          final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => StationListPage(label)));
-          print(result);
+          final result = await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => StationListPage(
+                label,
+                isDepatureStation,
+                arrivalStation: arrivalStation,
+                depatureStation: departureStation,
+              ),
+            ),
+          );
           setState(() {
             if (isDepatureStation) {
               departureStation = result ?? departureStation;
