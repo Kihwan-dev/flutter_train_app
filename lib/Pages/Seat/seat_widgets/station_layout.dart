@@ -14,24 +14,32 @@ class StationLayout extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(
-            departureStation,
-            style: TextStyle(
-              color: AppColorList.mainColor,
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
+          Expanded(
+            child: Center(
+              child: Text(
+                departureStation,
+                style: TextStyle(
+                  color: AppColorList.mainColor,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
           Icon(
             Icons.arrow_circle_right_outlined,
             size: 30,
           ),
-          Text(
-            arrivalStation,
-            style: TextStyle(
-              color: AppColorList.mainColor,
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
+          Expanded(
+            child: Center(
+              child: Text(
+                arrivalStation,
+                style: TextStyle(
+                  color: AppColorList.mainColor,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
         ],
