@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class BasicTitleAppBar extends StatelessWidget implements PreferredSizeWidget{
-
-  BasicTitleAppBar({required this.appBarTitleText, required this.isBackOn});
+class BasicTitleAppBar extends StatelessWidget implements PreferredSizeWidget {
+  BasicTitleAppBar(this.appBarTitleText, {this.isBackOn = false, this.actions});
 
   String appBarTitleText;
   bool isBackOn;
+  List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +13,10 @@ class BasicTitleAppBar extends StatelessWidget implements PreferredSizeWidget{
       title: Text(appBarTitleText),
       centerTitle: true,
       automaticallyImplyLeading: isBackOn,
+      actions: actions,
     );
   }
-  
+
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

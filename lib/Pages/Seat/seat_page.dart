@@ -20,7 +20,7 @@ class _SeatPageState extends State<SeatPage> {
   String? selectedRow;
   String? selectedCol;
 
-  void selectSeat(String row, String col) {
+  void _onSelect(String row, String col) {
     setState(() {
       selectedRow = row;
       selectedCol = col;
@@ -30,7 +30,7 @@ class _SeatPageState extends State<SeatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BasicTitleAppBar(appBarTitleText: "좌석 선택", isBackOn: true),
+      appBar: BasicTitleAppBar("좌석 선택"),
       bottomNavigationBar: Container(
         padding: EdgeInsets.fromLTRB(20, 0, 20, 50),
         height: 100,
@@ -40,7 +40,7 @@ class _SeatPageState extends State<SeatPage> {
             if (selectedRow == null && selectedCol == null) {
               return;
             }
-            showDialog(context);
+            _showDialog(context);
           },
           child: Text("예매 하기"),
         ),
@@ -54,13 +54,13 @@ class _SeatPageState extends State<SeatPage> {
           SizedBox(height: 10),
           ColumnLabelLayout(),
           SizedBox(height: 10),
-          SelectableSeatLayout(selectedRow, selectedCol, selectSeat),
+          SelectableSeatLayout(selectedRow, selectedCol, _onSelect),
         ],
       ),
     );
   }
 
-  Future<dynamic> showDialog(BuildContext context) {
+  Future<dynamic> _showDialog(BuildContext context) {
     return showCupertinoDialog(
       context: context,
       builder: (context) {

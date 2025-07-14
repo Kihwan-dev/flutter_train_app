@@ -14,8 +14,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-      appBar: BasicTitleAppBar(appBarTitleText: "기차 예매", isBackOn: false),
+      appBar: BasicTitleAppBar("기차 예매"),
       backgroundColor: Theme.of(context).colorScheme.brightness == Brightness.light ? Colors.grey[200] : Theme.of(context).colorScheme.surface,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -26,21 +27,19 @@ class _HomePageState extends State<HomePage> {
               height: 200,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.grey[800]
-                : Colors.white,
+                color: isDarkMode ? Colors.grey[800] : Colors.white,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  getSeletStationBox(context, "출발역", true),
+                  _getSeletStationBox(context, "출발역", true),
                   Container(
                     height: 50,
                     width: 2,
                     color: Colors.grey[400],
                   ),
-                  getSeletStationBox(context, "도착역", false),
+                  _getSeletStationBox(context, "도착역", false),
                 ],
               ),
             ),
@@ -68,7 +67,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Expanded getSeletStationBox(BuildContext context, String label, bool isDepatureStation) {
+  Expanded _getSeletStationBox(BuildContext context, String label, bool isDepartureStation) {
     return Expanded(
       child: GestureDetector(
         onTap: () async {
@@ -77,14 +76,14 @@ class _HomePageState extends State<HomePage> {
             MaterialPageRoute(
               builder: (context) => StationListPage(
                 label,
-                isDepatureStation,
+                isDepartureStation,
                 arrivalStation: arrivalStation,
-                depatureStation: departureStation,
+                departureStation: departureStation,
               ),
             ),
           );
           setState(() {
-            if (isDepatureStation) {
+            if (isDepartureStation) {
               departureStation = result ?? departureStation;
             } else {
               arrivalStation = result ?? arrivalStation;
@@ -103,7 +102,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Text(
-              isDepatureStation ? departureStation : arrivalStation,
+              isDepartureStation ? departureStation : arrivalStation,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
           ],

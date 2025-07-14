@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class SelectableSeatLayout extends StatelessWidget {
-  SelectableSeatLayout(this.selectedRow, this.selectedCol, this.selectSeat);
+  SelectableSeatLayout(this.selectedRow, this.selectedCol, this.onSelect);
 
   String? selectedRow;
   String? selectedCol;
 
-  void Function(String row, String col) selectSeat;
+  void Function(String row, String col) onSelect;
 
   @override
   Widget build(BuildContext context) {
@@ -17,41 +17,41 @@ class SelectableSeatLayout extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              getColumnLabelBox("A"),
+              _getColumnLabelBox("A"),
               SizedBox(width: 4),
-              getColumnLabelBox("B"),
+              _getColumnLabelBox("B"),
               SizedBox(width: 4),
-              getColumnLabelBox(""),
+              _getColumnLabelBox(""),
               SizedBox(width: 4),
-              getColumnLabelBox("C"),
+              _getColumnLabelBox("C"),
               SizedBox(width: 4),
-              getColumnLabelBox("D"),
+              _getColumnLabelBox("D"),
             ],
           ),
           ...List.generate(
             20,
-            (index) => getRowOfSelectableSeat(context, index + 1),
+            (index) => _getRowOfSelectableSeat(context, index + 1),
           ),
         ],
       ),
     );
   }
 
-  Widget getRowOfSelectableSeat(BuildContext context, int row) {
+  Widget _getRowOfSelectableSeat(BuildContext context, int row) {
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            getSelectableSeat(context, row.toString(), "A"),
+            _getSelectableSeat(context, row.toString(), "A"),
             SizedBox(width: 4),
-            getSelectableSeat(context, row.toString(), "B"),
+            _getSelectableSeat(context, row.toString(), "B"),
             SizedBox(width: 4),
-            getColumnLabelBox(row.toString()),
+            _getColumnLabelBox(row.toString()),
             SizedBox(width: 4),
-            getSelectableSeat(context, row.toString(), "C"),
+            _getSelectableSeat(context, row.toString(), "C"),
             SizedBox(width: 4),
-            getSelectableSeat(context, row.toString(), "D"),
+            _getSelectableSeat(context, row.toString(), "D"),
           ],
         ),
         row < 20 ? SizedBox(height: 8) : SizedBox(),
@@ -59,24 +59,24 @@ class SelectableSeatLayout extends StatelessWidget {
     );
   }
 
-  Widget getSelectableSeat(BuildContext context, String row, String col) {
+  Widget _getSelectableSeat(BuildContext context, String row, String col) {
+    final isDarkMode = Theme.of(context).colorScheme.brightness == Brightness.dark;
     return GestureDetector(
       onTap: () {
-        print("$row$col");
-        selectSeat(row, col);
+        onSelect(row, col);
       },
       child: Container(
         width: 50,
         height: 50,
         decoration: BoxDecoration(
-          color: selectedCol == col && selectedRow == row ? Colors.purple : Theme.of(context).colorScheme.brightness == Brightness.dark ? Colors.grey[800] : Colors.grey[300],
+          color: selectedCol == col && selectedRow == row ? Colors.purple : Colors.grey[isDarkMode ? 800 : 300],
           borderRadius: BorderRadius.circular(8),
         ),
       ),
     );
   }
 
-  Widget getColumnLabelBox(String label) {
+  Widget _getColumnLabelBox(String label) {
     return SizedBox.square(
       dimension: 50,
       child: Center(

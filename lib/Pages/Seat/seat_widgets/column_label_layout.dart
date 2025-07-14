@@ -6,17 +6,18 @@ class ColumnLabelLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).colorScheme.brightness == Brightness.dark;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        getColumnLabel("선택됨", Colors.purple),
+        _getColumnLabel("선택됨", Colors.purple),
         SizedBox(width: 10),
-        getColumnLabel("선택 안 됨", Colors.grey[Theme.of(context).colorScheme.brightness == Brightness.dark ? 800 : 300]),
+        _getColumnLabel("선택 안 됨", Colors.grey[isDarkMode ? 800 : 300]),
       ],
     );
   }
   
-  Row getColumnLabel(String content, Color? color) {
+  Row _getColumnLabel(String content, Color? color) {
     return Row(
       children: [
         Container(

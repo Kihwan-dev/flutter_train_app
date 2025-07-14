@@ -3,29 +3,19 @@ import 'package:flutter_train_app/models/station_list_data.dart';
 import 'package:flutter_train_app/Widgets/basic_title_appbar.dart';
 
 class StationListPage extends StatelessWidget {
-  StationListPage(this.title, this.isDepatureStation, {this.depatureStation, this.arrivalStation});
+  StationListPage(this.title, this.isDepartureStation, {this.departureStation, this.arrivalStation});
 
   String title;
-  bool isDepatureStation;
-  String? depatureStation;
+  bool isDepartureStation;
+  String? departureStation;
   String? arrivalStation;
 
-  List<String> getStationList() {
-    List<String> list = [];
-
-    if(isDepatureStation) {
-      list = stationList.where((station) => station != arrivalStation).toList();
-    } else {
-      list = stationList.where((station) => station != depatureStation).toList();
-    }
-
-    return list;
-  }
+  List<String> getStationList() => stationList.where((station) => station != (isDepartureStation ? arrivalStation : departureStation)).toList();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BasicTitleAppBar(appBarTitleText: title, isBackOn: true),
+      appBar: BasicTitleAppBar(title, isBackOn: true),
       body: ListView.builder(
         itemCount: getStationList().length,
         itemBuilder: (context, index) {

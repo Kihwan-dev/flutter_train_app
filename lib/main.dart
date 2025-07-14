@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_train_app/pages/Home/home_page.dart';
+import 'package:flutter_train_app/models/theme_data.dart';
+import 'package:flutter_train_app/pages/home/home_page.dart';
 import 'package:flutter/rendering.dart';
 
 void main() {
@@ -15,48 +16,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // themeMode: ThemeMode.light,
       themeMode: ThemeMode.dark,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.purple,
-          brightness: Brightness.light,
-        ),
-        textTheme: TextTheme(bodyLarge: TextStyle(fontSize: 40)),
-        dividerColor: Colors.black38,
-        highlightColor: Colors.purple,
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-            shape: WidgetStatePropertyAll(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-            backgroundColor: WidgetStatePropertyAll(Colors.purple),
-            foregroundColor: WidgetStatePropertyAll(Colors.white),
-          ),
-        ),
-
-      ),
-      darkTheme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.purple,
-          brightness: Brightness.dark,
-        ),
-        // scaffoldBackgroundColor: Colors.black38,
-        textTheme: TextTheme(bodyLarge: TextStyle(fontSize: 40, color: Colors.white)),
-        dividerColor: Colors.white38,
-        highlightColor: Colors.purple,
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-            shape: WidgetStatePropertyAll(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-            backgroundColor: WidgetStatePropertyAll(Colors.purple),
-            foregroundColor: WidgetStatePropertyAll(Colors.white),
-          ),
-        ),
-      ),
+      theme: lightTheme,
+      darkTheme: darkTheme,
       home: HomePage(),
     );
   }
