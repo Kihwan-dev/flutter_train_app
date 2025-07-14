@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BasicTitleAppBar(appBarTitleText: "기차 예매", isBackOn: false),
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Theme.of(context).colorScheme.brightness == Brightness.light ? Colors.grey[200] : Theme.of(context).colorScheme.surface,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -25,7 +25,12 @@ class _HomePageState extends State<HomePage> {
             Container(
               height: 200,
               width: double.infinity,
-              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
+              decoration: BoxDecoration(
+                color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.grey[800]
+                : Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -45,7 +50,7 @@ class _HomePageState extends State<HomePage> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  if(departureStation == "선택" || arrivalStation == "선택") return;
+                  if (departureStation == "선택" || arrivalStation == "선택") return;
                   Navigator.push(context, MaterialPageRoute(builder: (context) => SeatPage(departureStation, arrivalStation)));
                 },
                 child: Text(
@@ -99,9 +104,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Text(
               isDepatureStation ? departureStation : arrivalStation,
-              style: TextStyle(
-                fontSize: 40,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
           ],
         ),

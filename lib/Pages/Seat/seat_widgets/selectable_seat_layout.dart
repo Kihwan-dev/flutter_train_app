@@ -30,28 +30,28 @@ class SelectableSeatLayout extends StatelessWidget {
           ),
           ...List.generate(
             20,
-            (index) => getRowOfSelectableSeat(index + 1),
+            (index) => getRowOfSelectableSeat(context, index + 1),
           ),
         ],
       ),
     );
   }
 
-  Widget getRowOfSelectableSeat(int row) {
+  Widget getRowOfSelectableSeat(BuildContext context, int row) {
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            getSelectableSeat(row.toString(), "A"),
+            getSelectableSeat(context, row.toString(), "A"),
             SizedBox(width: 4),
-            getSelectableSeat(row.toString(), "B"),
+            getSelectableSeat(context, row.toString(), "B"),
             SizedBox(width: 4),
             getColumnLabelBox(row.toString()),
             SizedBox(width: 4),
-            getSelectableSeat(row.toString(), "C"),
+            getSelectableSeat(context, row.toString(), "C"),
             SizedBox(width: 4),
-            getSelectableSeat(row.toString(), "D"),
+            getSelectableSeat(context, row.toString(), "D"),
           ],
         ),
         row < 20 ? SizedBox(height: 8) : SizedBox(),
@@ -59,7 +59,7 @@ class SelectableSeatLayout extends StatelessWidget {
     );
   }
 
-  Widget getSelectableSeat(String row, String col) {
+  Widget getSelectableSeat(BuildContext context, String row, String col) {
     return GestureDetector(
       onTap: () {
         print("$row$col");
@@ -69,7 +69,7 @@ class SelectableSeatLayout extends StatelessWidget {
         width: 50,
         height: 50,
         decoration: BoxDecoration(
-          color: selectedCol == col && selectedRow == row ? Colors.purple : Colors.grey[300],
+          color: selectedCol == col && selectedRow == row ? Colors.purple : Theme.of(context).colorScheme.brightness == Brightness.dark ? Colors.grey[800] : Colors.grey[300],
           borderRadius: BorderRadius.circular(8),
         ),
       ),

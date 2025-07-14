@@ -11,12 +11,12 @@ class ColumnLabelLayout extends StatelessWidget {
       children: [
         getColumnLabel("선택됨", Colors.purple),
         SizedBox(width: 10),
-        getColumnLabel("선택 안 됨", Colors.grey[300]!),
+        getColumnLabel("선택 안 됨", Colors.grey[Theme.of(context).colorScheme.brightness == Brightness.dark ? 800 : 300]),
       ],
     );
   }
   
-  Row getColumnLabel(String content, Color color) {
+  Row getColumnLabel(String content, Color? color) {
     return Row(
       children: [
         Container(

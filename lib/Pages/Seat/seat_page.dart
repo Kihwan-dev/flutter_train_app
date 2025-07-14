@@ -66,7 +66,7 @@ class _SeatPageState extends State<SeatPage> {
       builder: (context) {
         return CupertinoAlertDialog(
           title: Text("예매 하시겠습니까?"),
-          content: Text("좌석:$selectedRow-$selectedCol"),
+          content: Text("좌석 : $selectedRow-$selectedCol"),
           actions: [
             CupertinoDialogAction(
               isDestructiveAction: true,
