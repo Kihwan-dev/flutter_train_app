@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_train_app/models/app_color_list.dart';
 
 class ColumnLabelLayout extends StatelessWidget {
   const ColumnLabelLayout({super.key});
@@ -10,9 +11,9 @@ class ColumnLabelLayout extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _getColumnLabel("선택됨", Colors.purple),
+        _getColumnLabel("선택됨", AppColorList.selectedColor),
         SizedBox(width: 10),
-        _getColumnLabel("선택 안 됨", Colors.grey[isDarkMode ? 800 : 300]),
+        _getColumnLabel("선택 안 됨", isDarkMode ? AppColorList.unSelectedColorDark : AppColorList.unSelectedColorLight),
       ],
     );
   }

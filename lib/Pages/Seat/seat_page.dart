@@ -16,7 +16,6 @@ class SeatPage extends StatefulWidget {
 }
 
 class _SeatPageState extends State<SeatPage> {
-
   String? selectedRow;
   String? selectedCol;
 
@@ -42,7 +41,13 @@ class _SeatPageState extends State<SeatPage> {
             }
             _showDialog(context);
           },
-          child: Text("예매 하기"),
+          child: Text(
+            "예매 하기",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ),
       body: Column(
@@ -93,5 +98,4 @@ class _SeatPageState extends State<SeatPage> {
       },
     );
   }
-
 }

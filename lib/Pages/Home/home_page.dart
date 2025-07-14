@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_train_app/models/app_color_list.dart';
 import 'package:flutter_train_app/pages/seat/seat_page.dart';
 import 'package:flutter_train_app/pages/station/station_list_page.dart';
 import 'package:flutter_train_app/Widgets/basic_title_appbar.dart';
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: BasicTitleAppBar("기차 예매"),
-      backgroundColor: Theme.of(context).colorScheme.brightness == Brightness.light ? Colors.grey[200] : Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).colorScheme.brightness == Brightness.light ? AppColorList.scaffoldBodyBgLight : Theme.of(context).colorScheme.surface,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
               height: 200,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: isDarkMode ? Colors.grey[800] : Colors.white,
+                color: isDarkMode ? AppColorList.containerBgDark : AppColorList.containerBgLight,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Row(
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     height: 50,
                     width: 2,
-                    color: Colors.grey[400],
+                    color: Theme.of(context).dividerColor,
                   ),
                   _getSeletStationBox(context, "도착역", false),
                 ],
@@ -96,7 +97,7 @@ class _HomePageState extends State<HomePage> {
             Text(
               label,
               style: TextStyle(
-                color: Colors.grey,
+                color: AppColorList.greyText,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),

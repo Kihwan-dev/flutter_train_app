@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_train_app/models/app_color_list.dart';
 
 class StationLayout extends StatelessWidget {
 
@@ -16,7 +17,7 @@ class StationLayout extends StatelessWidget {
           Text(
             departureStation,
             style: TextStyle(
-              color: Colors.purple,
+              color: AppColorList.mainColor,
               fontSize: 30,
               fontWeight: FontWeight.bold,
             ),
@@ -28,7 +29,7 @@ class StationLayout extends StatelessWidget {
           Text(
             arrivalStation,
             style: TextStyle(
-              color: Colors.purple,
+              color: AppColorList.mainColor,
               fontSize: 30,
               fontWeight: FontWeight.bold,
             ),

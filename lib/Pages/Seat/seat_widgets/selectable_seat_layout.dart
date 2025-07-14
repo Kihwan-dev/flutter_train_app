@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_train_app/models/app_color_list.dart';
 
 class SelectableSeatLayout extends StatelessWidget {
   SelectableSeatLayout(this.selectedRow, this.selectedCol, this.onSelect);
@@ -69,7 +70,11 @@ class SelectableSeatLayout extends StatelessWidget {
         width: 50,
         height: 50,
         decoration: BoxDecoration(
-          color: selectedCol == col && selectedRow == row ? Colors.purple : Colors.grey[isDarkMode ? 800 : 300],
+          color: selectedCol == col && selectedRow == row
+              ? AppColorList.selectedColor
+              : isDarkMode
+                  ? AppColorList.unSelectedColorDark
+                  : AppColorList.unSelectedColorLight,
           borderRadius: BorderRadius.circular(8),
         ),
       ),

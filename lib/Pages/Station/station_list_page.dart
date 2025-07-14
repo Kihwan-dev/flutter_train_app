@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_train_app/models/app_color_list.dart';
 import 'package:flutter_train_app/models/station_list_data.dart';
 import 'package:flutter_train_app/Widgets/basic_title_appbar.dart';
 
@@ -29,7 +30,7 @@ class StationListPage extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
-                    color: Colors.grey[300]!,
+                    color: AppColorList.bottomBorderLine!,
                   ),
                 ),
               ),
