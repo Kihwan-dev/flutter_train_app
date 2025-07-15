@@ -29,7 +29,7 @@ class _SeatPageState extends State<SeatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BasicTitleAppBar("좌석 선택"),
+      appBar: BasicTitleAppBar("좌석 선택", isBackOn: true),
       bottomNavigationBar: Container(
         padding: EdgeInsets.fromLTRB(20, 0, 20, 50),
         height: 100,

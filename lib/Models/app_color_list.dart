@@ -11,4 +11,7 @@ class AppColorList {
   static var selectedColor = Colors.purple;
   static var unSelectedColorLight = Colors.grey[300];
   static var unSelectedColorDark = Colors.grey[800];
+  static var normalBlack = Colors.black;
+  static var normalWhite = Colors.white;
+  static var toggleBorderLine = Colors.purple;
 }
