@@ -65,6 +65,7 @@ class _SeatPageState extends State<SeatPage> {
     );
   }
 
+  // 예매 하기 버튼의 다이얼로그
   Future<dynamic> _showDialog(BuildContext context) {
     return showCupertinoDialog(
       context: context,

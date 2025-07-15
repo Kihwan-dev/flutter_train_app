@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import 'package:flutter_train_app/Widgets/basic_title_appbar.dart';
@@ -91,6 +90,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // 토글 위젯
   SizedBox _getToggleWidget({required IconData icon, required String title}) {
     return SizedBox(
       width: 100,
@@ -107,6 +107,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // 출발역 / 도착역 선택 박스
   Expanded _getSeletStationBox(BuildContext context, String label, bool isDepartureStation) {
     return Expanded(
       child: GestureDetector(

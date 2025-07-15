@@ -18,6 +18,7 @@ class ColumnLabelLayout extends StatelessWidget {
     );
   }
   
+  // 선택 / 선택 안됨 레이블
   Row _getColumnLabel(String content, Color? color) {
     return Row(
       children: [

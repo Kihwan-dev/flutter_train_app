@@ -38,6 +38,7 @@ class SelectableSeatLayout extends StatelessWidget {
     );
   }
 
+  // 좌석 선택 UI의 한 행
   Widget _getRowOfSelectableSeat(BuildContext context, int row) {
     return Column(
       children: [
@@ -60,6 +61,7 @@ class SelectableSeatLayout extends StatelessWidget {
     );
   }
 
+  // 선택 가능한 좌석 UI
   Widget _getSelectableSeat(BuildContext context, String row, String col) {
     final isDarkMode = Theme.of(context).colorScheme.brightness == Brightness.dark;
     return GestureDetector(
@@ -81,6 +83,7 @@ class SelectableSeatLayout extends StatelessWidget {
     );
   }
 
+  // 좌석의 열 이름을 보여주기 위한 UI 위젯
   Widget _getColumnLabelBox(String label) {
     return SizedBox.square(
       dimension: 50,
